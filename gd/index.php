@@ -1,7 +1,18 @@
-<div>
-    <h2>Upload Image</h2>
-    <form action="upload.php" method="post" enctype="multipart/form-data">
-        <input type="file" name="image" accept="image/*">
-        <input type="submit" value="Upload Image" name="submit">
-    </form>
-</div>
+<?php
+require_once "controllers/ImageController.php";
+require_once "models/ImageModel.php";
+
+if (isset($_GET['action'])) {
+    $action = $_GET['action'];
+
+    switch ($action) {
+        case 'upload':
+            $controller = new ImageController();
+            $controller->manipulate();
+            break;
+        default:
+            $controller = new ImageController();
+            $controller->index();
+            exit;
+    }
+}
