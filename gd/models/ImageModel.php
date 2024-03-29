@@ -1,20 +1,22 @@
 <?php
 
-class ImageModel {
-    public function uploadImage($file) {
-        if (empty($file["name"])) {
+class ImageModel
+{
+    public function uploadImage($file)
+    {
+        if (empty($file['name'])) {
             return false;
         }
 
-        $target_dir = "uploads/";
-        $target_file = $target_dir . basename($file["name"]);
+        $target_dir = 'uploads/';
+        $target_file = $target_dir . basename($file['name']);
 
         if (file_exists($target_file)) {
-            return ["message" => "Sorry, file already exists."];
+            return ['message' => 'Sorry, file already exists.'];
         }
 
-        if (move_uploaded_file($file["tmp_name"], $target_file)) {
-            $thumbnailPath = "thumbnails/" . basename($file["name"]);
+        if (move_uploaded_file($file['tmp_name'], $target_file)) {
+            $thumbnailPath = 'thumbnails/' . basename($file['name']);
             $thumbnailWidth = 100;
             $thumbnailHeight = 70;
 
@@ -31,7 +33,7 @@ class ImageModel {
                 'thumbnail' => $thumbnailPath
             ];
         } else {
-            return ["message" => "Sorry, there was an error uploading your file."];
+            return ['message' => 'Sorry, there was an error uploading your file.'];
         }
     }
 }
